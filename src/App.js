@@ -50,7 +50,7 @@ class App extends Component {
           <NavBar
             isAuthenticated={this.state.isAuthenticated}
             authButtonMethod={this.state.isAuthenticated ? this.logout.bind(this) : this.login.bind(this)}
-            user={this.state.user}/> />
+            user={this.state.user}/>
           <Container>
             {error}
             <Route exact path="/"
