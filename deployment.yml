@@ -1,0 +1,35 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: graphtutorial
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: graphtutorial
+  template:
+    metadata:
+      labels:
+        app: graphtutorial
+    spec:
+      containers:
+        - name: graphtutorial
+          image: yadhikari/graphtutorial
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+      restartPolicy: Always      
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: graphtutorial
+spec:
+  type: NodePort
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+      nodePort: 31000
+  selector:
+    app: graphtutorial
